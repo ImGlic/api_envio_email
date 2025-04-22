@@ -5,7 +5,7 @@ from email_utils import send_email
 app = FastAPI()
 
 class EmailRequest(BaseModel):
-    name: str  # Novo campo para capturar o nome do usuário
+    name: str 
     to: EmailStr
     subject: str
     message: str
@@ -17,7 +17,7 @@ def send_email_endpoint(email_request: EmailRequest):
             email_request.to, 
             email_request.subject, 
             email_request.message, 
-            email_request.name  # Passamos o nome do remetente
+            email_request.name
         )
         return {"status": "Email enviado com sucesso!"}
     except Exception as e:
