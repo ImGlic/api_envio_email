@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def send_email(to_email: str, subject: str, message: str, sender_name: str, reply_to: str None):
+def send_email(to_email: str, subject: str, message: str, sender_name: str, reply_to: str = None):
     email = EmailMessage()
     email["From"] = reply_to
     email["To"] = to_email
