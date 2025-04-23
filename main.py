@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, EmailStr
 from email_utils import send_email
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -22,3 +24,8 @@ def send_email_endpoint(email_request: EmailRequest):
         return {"status": "Email enviado com sucesso!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao enviar email: {str(e)}")
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
