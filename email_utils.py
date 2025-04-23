@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def send_email(to_email: str, subject: str, message: str, sender_name: str, reply_to: str):
+def send_email(to_email: str, subject: str, message: str, sender_name: str, reply_to: str None):
     email = EmailMessage()
-    email["From"] = os.getenv("EMAIL_USER")
+    email["From"] = reply_to
     email["To"] = to_email
     email["Subject"] = subject
     email["Reply-To"] = reply_to

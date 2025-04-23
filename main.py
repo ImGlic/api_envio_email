@@ -26,7 +26,7 @@ class EmailRequest(BaseModel):
 def send_email_endpoint(email_request: EmailRequest):
     try:
         send_email(
-            to=email_request.to, 
+            to_email=email_request.to, 
             subject=email_request.subject, 
             message=email_request.message, 
             name=email_request.name,
