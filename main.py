@@ -18,6 +18,7 @@ app.add_middleware(
 class EmailRequest(BaseModel):
     name: str 
     to: EmailStr
+    replyTo: EmailStr  # novo campo
     subject: str
     message: str
 
@@ -25,15 +26,15 @@ class EmailRequest(BaseModel):
 def send_email_endpoint(email_request: EmailRequest):
     try:
         send_email(
-            email_request.to, 
-            email_request.subject, 
-            email_request.message, 
-            email_request.name
+            to=email_request.to, 
+            subject=email_request.subject, 
+            message=email_request.message, 
+            name=email_request.name,
+            reply_to=email_request.replyTo
         )
         return {"status": "Email enviado com sucesso!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao enviar email: {str(e)}")
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
