@@ -5,12 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def send_email(to_email: str, subject: str, message: str, sender_name: str, reply_to: str = None):
+def send_email(to_email: str, subject: str, message: str, sender_name: str, mail_from: str = None):
     email = EmailMessage()
-    email["From"] = reply_to
+    email["From"] = mail_from
     email["To"] = to_email
     email["Subject"] = subject
-    email["Reply-To"] = reply_to
 
     email.set_content(message)
 

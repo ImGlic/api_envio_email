@@ -18,9 +18,9 @@ app.add_middleware(
 class EmailRequest(BaseModel):
     name: str 
     to: EmailStr
-    replyTo: EmailStr  # novo campo
     subject: str
     message: str
+    email_from: EmailStr
 
 @app.post("/send-email/")
 def send_email_endpoint(email_request: EmailRequest):
@@ -30,7 +30,7 @@ def send_email_endpoint(email_request: EmailRequest):
             subject=email_request.subject, 
             message=email_request.message, 
             name=email_request.name,
-            reply_to=email_request.replyTo
+            mail_from=email_request.email_from
         )
         return {"status": "Email enviado com sucesso!"}
     except Exception as e:
