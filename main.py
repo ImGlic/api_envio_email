@@ -1,10 +1,19 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, EmailStr
 from email_utils import send_email
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import uvicorn
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://portifolioatual-xi.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class EmailRequest(BaseModel):
     name: str 
