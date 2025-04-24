@@ -19,7 +19,7 @@ class EmailRequest(BaseModel):
     name: str 
     to: EmailStr
     subject: str
-    message: str,
+    message: str
     email_from: EmailStr
 
 @app.post("/send-email/")
