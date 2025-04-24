@@ -14,7 +14,7 @@ def send_email(to_email: str, subject: str, message: str, sender_name: str, repl
 
     email.set_content(message)
 
-   html_content = f"""
+   html_content = """
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
