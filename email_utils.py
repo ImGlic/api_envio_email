@@ -14,7 +14,7 @@ def send_email(to_email: str, subject: str, message: str, sender_name: str, repl
 
     email.set_content(message)
 
-    html_content = f"""
+   html_content = f"""
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -22,50 +22,85 @@ def send_email(to_email: str, subject: str, message: str, sender_name: str, repl
         <style>
             body {{
                 margin: 0;
-                padding: 0;
-                background-color: #0a0a23;
+                padding: 40px 20px;
+                background-color: #111827;
                 font-family: 'Segoe UI', sans-serif;
+                color: #111827;
             }}
             .container {{
                 max-width: 600px;
-                margin: 20px auto;
+                margin: auto;
                 background-color: #ffffff;
+                border-radius: 12px;
                 padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             }}
-            h1 {{
+            .header {{
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 24px;
+            }}
+            .header h1 {{
+                font-size: 22px;
                 color: #6C63FF;
-                font-size: 24px;
-                margin-bottom: 20px;
+                margin: 0;
             }}
-            p {{
-                color: #333;
-                font-size: 16px;
-                line-height: 1.6;
+            .label {{
+                font-weight: 600;
+                margin-bottom: 4px;
+                color: #111827;
+            }}
+            .value {{
+                margin: 0 0 16px 0;
+                color: #374151;
+            }}
+            .message-box {{
+                background-color: #f9fafb;
+                padding: 16px;
+                border-radius: 8px;
+                white-space: pre-wrap;
+                color: #374151;
             }}
             .footer {{
-                margin-top: 30px;
+                margin-top: 32px;
                 font-size: 12px;
+                color: #9ca3af;
                 text-align: center;
-                color: #aaa;
+            }}
+            a {{
+                color: #6C63FF;
+                text-decoration: none;
             }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>📩 Novo contato via portfólio</h1>
-            <p><strong>Nome:</strong> {sender_name}</p>  <!-- Nome do remetente -->
-            <p><strong>Assunto:</strong> {subject}</p>
-            <p><strong>Mensagem:</strong></p>
-            <p>{message}</p>
+            <div class="header">
+                <img src="https://img.icons8.com/fluency/48/secured-letter.png" width="32" />
+                <h1>Novo contato via portfólio</h1>
+            </div>
+
+            <p class="label">Nome:</p>
+            <p class="value">{sender_name}</p>
+
+            <p class="label">Assunto:</p>
+            <p class="value">{subject}</p>
+
+            <p class="label">Mensagem:</p>
+            <div class="message-box">
+                <p>Email do usuário: <a href="mailto:{email_from}">{email_from}</a></p>
+                <p>{message}</p>
+            </div>
+
             <div class="footer">
-                Esta mensagem foi enviada pelo seu formulário do portfólio.
+                Esta mensagem foi enviada a partir do seu formulário no portfólio.
             </div>
         </div>
     </body>
     </html>
     """
+
 
     email.add_alternative(html_content, subtype="html")
 
