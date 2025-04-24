@@ -19,7 +19,8 @@ class EmailRequest(BaseModel):
     name: str 
     to: EmailStr
     subject: str
-    message: str
+    message: str,
+    email_from: EmailStr
 
 @app.post("/send-email/")
 def send_email_endpoint(email_request: EmailRequest):
@@ -28,7 +29,8 @@ def send_email_endpoint(email_request: EmailRequest):
             to_email=email_request.to, 
             subject=email_request.subject, 
             message=email_request.message, 
-            name=email_request.name
+            sender_name=email_request.name,
+            reply_to=email_request.email_from
         )
         return {"status": "Email enviado com sucesso!"}
     except Exception as e:
